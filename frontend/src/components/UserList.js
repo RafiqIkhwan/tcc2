@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../utils"; // Tambahkan ini
 
 const UserList = () => {
   const [users, setUser] = useState([]);
@@ -9,7 +10,7 @@ const UserList = () => {
   // Cek login di awal render
   useEffect(() => {
     if (localStorage.getItem("isLoggedIn") !== "true") {
-      navigate("/login");
+      navigate("/login"); 
     } else {
       getUsers();
     }
@@ -17,13 +18,13 @@ const UserList = () => {
   }, []);
 
   const getUsers = async () => {
-    const response = await axios.get("http://localhost:5000/users");
+    const response = await axios.get(`${BASE_URL}users`);
     setUser(response.data);
   };
 
   const deleteUser = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/users/${id}`);
+      await axios.delete(`${BASE_URL}users/${id}`);
       getUsers();
     } catch (error) {
       console.log(error);

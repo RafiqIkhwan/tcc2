@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../utils"; 
 
 const AddUser = () => {
   const [name, setName] = useState("");
@@ -18,12 +19,12 @@ const AddUser = () => {
   const saveUser = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/users", {
+      await axios.post(`${BASE_URL}users`, {
         name,
         text,
         tipe,
       });
-      navigate("/userlist"); // arahkan ke userlist setelah tambah user
+      navigate("/users"); // arahkan ke /users setelah tambah user
     } catch (error) {
       console.log(error);
     }

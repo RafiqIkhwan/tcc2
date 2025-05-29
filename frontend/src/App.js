@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/register";
 import UserList from "./components/UserList";
@@ -9,12 +9,11 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/userlist" element={<UserList />} />
-        <Route path="/userlist/add" element={<AddUser />} />
-        <Route path="/userlist/edit/:id" element={<EditUser />} />
+        <Route path="/users" element={<UserList />} />
+        <Route path="/add" element={<AddUser />} />
+        <Route path="/edit-user/:id" element={<EditUser />} />
       </Routes>
     </BrowserRouter>
   );

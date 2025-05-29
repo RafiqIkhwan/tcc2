@@ -1,30 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './Login.module.css'; // Import file CSS Modules
+import styles from './Login.module.css';
+import { BASE_URL } from "../utils"; // Import BASE_URL jika nanti ingin request ke backend
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState(''); // State untuk pesan error
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
     if (localStorage.getItem("isLoggedIn") === "true") {
-      navigate('/userlist');
+      navigate('/users');
     }
   }, [navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrorMessage(''); // Reset pesan error saat submit
+    setErrorMessage('');
     const staticEmail = 'nurul@gmail.com';
     const staticPassword = 'cantik';
 
     if (email === staticEmail && password === staticPassword) {
-      localStorage.setItem("isLoggedIn", "true"); // simpan status login
-      navigate('/userlist');
+      localStorage.setItem("isLoggedIn", "true");
+      navigate('/users');
     } else {
-      setErrorMessage('Invalid credentials. Please try again.'); // Set pesan error
+      setErrorMessage('Invalid credentials. Please try again.');
     }
   };
 
