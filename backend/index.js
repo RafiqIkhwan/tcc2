@@ -13,5 +13,4 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use("/api",UserRoute);
 
-const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`Server up and running on port ${port}...`));
+app.listen(5000, () => console.log("Server jalan di port 5000"))
