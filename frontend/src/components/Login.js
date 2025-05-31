@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.css';
-import { BASE_URL } from "../utils"; // Import BASE_URL jika nanti ingin request ke backend
 
 const Login = () => {
   const [email, setEmail] = useState('');
