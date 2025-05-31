@@ -56,3 +56,39 @@ export const deleteUser = async(req, res) =>{
         console.log(error.message);
     }
 }
+
+export const loginHandler = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await User.findOne({ where: { email } });
+        if (!user) {
+            return res.status(401).json({ msg: "User not found" });
+        }
+        // Ganti dengan hash password di production!
+        if (user.password !== password) {
+            return res.status(401).json({ msg: "Invalid password" });
+        }
+        // Simpel: return user info (tanpa token)
+        res.status(200).json({ msg: "Login successful", user });
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({ msg: "Server error" });
+    }
+};
+
+export const registerHandler = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        // Cek email sudah terdaftar
+        const existingUser = await User.findOne({ where: { email } });
+        if (existingUser) {
+            return res.status(400).json({ msg: "Email already registered" });
+        }
+        // Ganti dengan hash password di production!
+        await User.create({ email, password });
+        res.status(201).json({ msg: "Registration successful" });
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({ msg: "Server error" });
+    }
+};

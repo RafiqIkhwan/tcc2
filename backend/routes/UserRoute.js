@@ -1,5 +1,7 @@
 import express from "express";
 import {
+    loginHandler,
+    registerHandler,
     getUsers, 
     getUserById,
     createUser,
@@ -9,6 +11,11 @@ import {
 
 const router = express.Router();
 
+// Auth routes
+router.post('/login', loginHandler);
+router.post('/register', registerHandler);
+
+// User CRUD routes
 router.get('/users', getUsers);
 router.get('/users/:id', getUserById);
 router.post('/users', createUser);
