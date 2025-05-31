@@ -5,12 +5,15 @@ import UserRoute from "./routes/UserRoute.js";
 const app = express();
 
 const corsOptions = {
- origin: ['http://localhost:3001','http://localhost:3000'],
-  credentials: true,
+ origin: [
+    'http://localhost:3000',
+    'https://3000-cs-810354217693-default.cs-asia-southeast1-seal.cloudshell.dev'
+  ], credentials: true,
 };
 
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use("/api",UserRoute);
 
-app.listen(5000, () => console.log("Server jalan di port 5000"))
+const PORT = process.env.PORT;
+app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
